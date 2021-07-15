@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slowsvc
+  namespace: ambassador
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slowsvc
+  template:
+    metadata:
+      labels:
+        app: slowsvc
+    spec:
+      containers:
+      - name: slowsvc
+        image: aidanhahn/slowsvc:latest
+        ports:
+          - containerPort: 10001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: slowsvc
+  namespace: ambassador
+spec:
+  selector:
+    app: slowsvc
+  ports:
+  - name: http
+    port: 80
+    targetPort: 10001
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: slowsvc-slow
+  namespace: ambassador
+spec:
+  prefix: /slow/
+  service: slowsvc
+doc:                                                                                                               
+  path: /endpoint
+  display_name: "slowsvc"
