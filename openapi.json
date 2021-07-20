@@ -1,0 +1,19 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "slow service"
+  },
+  "paths": {
+    "/endpoint": {
+      "get": {
+        "summary": "get the API specification",
+        "responses": {
+          "200": {
+            "description": "The API specification for this service"
+          }
+        }
+      }
+    }
+  }
+}

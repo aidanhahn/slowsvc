@@ -40,6 +40,7 @@ metadata:
 spec:
   prefix: /slow/
   service: slowsvc
-doc:                                                                                                               
-  path: /endpoint
-  display_name: "slowsvc"
+  docs:
+    path: /endpoint
+    display_name: "slow service"
+    timeout_ms: 4000
