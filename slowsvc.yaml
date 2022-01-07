@@ -32,7 +32,7 @@ spec:
     port: 80
     targetPort: 10001
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
   name: slowsvc-slow
@@ -40,7 +40,9 @@ metadata:
 spec:
   prefix: /slow/
   service: slowsvc
+  hostname: "*"
+  timeout_ms: 8000
   docs:
     path: /endpoint
     display_name: "slow service"
-    timeout_ms: 4000
+    timeout_ms: 8000
